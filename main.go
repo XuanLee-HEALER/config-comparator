@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"log"
 	"os"
 
@@ -9,40 +10,71 @@ import (
 )
 
 const (
-	blockSize = 1024
+	blockSize = 8
 )
+
+type Entries map[interface{}]interface{}
 
 func main() {
 	file1 := os.Args[1]
-	res := parseFile(file1)
-	fmt.Printf("comment: \n%v", res)
-}
-
-func parseFile(fileName string) map[interface{}]interface{} {
-	fData := readFile(fileName)
-	res := make(map[interface{}]interface{})
-
-	err := yaml.Unmarshal(fData, res)
+	var entries Entries
+	err := parseFile(file1, &entries)
 	if err != nil {
-		log.Fatalf("解析yaml文件错误，错误信息%v", err)
+		log.Printf("比较失败，错误信息：%v", err)
 	}
-	return res
+
+	handleEntries(&entries)
 }
 
-func readFile(fileName string) []byte {
+func handleEntries(entries *Entries) {
+	for k, _ := range *entries {
+		switch k.(type) {
+		case string:
+			fmt.Println(k)
+		default:
+			break
+		}
+	}
+}
+
+func parseFile(fileName string, entries *Entries) (err error) {
+	fData, err := readFile(fileName)
+	if err != nil {
+		log.Printf("打开文件%v错误，错误信息：%v", fileName, err)
+		return err
+	}
+
+	err = yaml.Unmarshal(fData, entries)
+	if err != nil {
+		log.Printf("解析yaml文件错误，错误信息：%v", err)
+		return err
+	}
+	return nil
+}
+
+func readFile(fileName string) (res []byte, err error) {
 	f, err := os.Open(fileName)
 	if err != nil {
-		log.Fatalf("打开文件%v错误，错误信息：%v", fileName, err)
+		log.Printf("打开文件%v错误，错误信息：%v", fileName, err)
 	}
 	defer f.Close()
-	fData := make([]byte, blockSize)
-	r, err := f.Read(fData)
-	if err != nil {
-		log.Fatalf("读取文件%v失败，错误信息：%v", fileName, err)
-	}
-	if len(fData) <= blockSize {
-		fData = fData[:r]
+	buf := make([]byte, blockSize)
+	res, rc := make([]byte, 0, blockSize), 0
+	for {
+		r, err := f.Read(buf)
+		res = append(res, buf[:r]...)
+		rc += r
+		if err != nil && err != io.EOF {
+			log.Printf("读取文件%v失败，错误信息：%v", fileName, err)
+			return nil, err
+		}
+
+		if err == io.EOF {
+			break
+		}
 	}
 
-	return fData
+	res = res[:rc]
+
+	return res, nil
 }
