@@ -1,0 +1,2356 @@
+#系统配置
+autoCache:
+  Caches:
+    - Name: Cache.WarnRuleBeenExecuted
+      ServiceId: RedisCacheFactory
+      Eternal: false
+      TimeToLive: 600
+      TimeToIdle: 600
+      EvictionPolicy: LRU
+      MaxElement: 10000
+    - Name: Cache.UserContext
+      ServiceId: RedisCacheFactory
+      Eternal: false
+      TimeToLive: 600
+      TimeToIdle: 600
+      EvictionPolicy: LRU
+      MaxElement: 10000
+    - Name: Cache.Statistics
+      ServiceId: RedisCacheFactory
+      Eternal: false
+      TimeToLive: 600
+      TimeToIdle: 600
+      EvictionPolicy: LRU
+      MaxElement: 10000
+    - Name: Cache.EaAreaTemporaryStorage
+      ServiceId: RedisCacheFactory
+      Eternal: false
+      TimeToLive: 0
+      TimeToIdle: 0
+      EvictionPolicy: LRU
+      MaxElement: 10000
+    - Name: Cache.BusinessType
+      ServiceId: RedisCacheFactory
+      Eternal: false
+      TimeToLive: 43200
+      TimeToIdle: 43200
+      EvictionPolicy: LRU
+      MaxElement: 10000
+    - Name: Cache.RenderStatus
+      ServiceId: RedisCacheFactory
+      Eternal: false
+      TimeToLive: 300
+      TimeToIdle: 0
+      EvictionPolicy: LRU
+      MaxElement: 0
+    - Name: Cache.Report
+      ServiceId: RedisCacheFactory
+      Eternal: false
+      TimeToLive: 600
+      TimeToIdle: 600
+      EvictionPolicy: LRU
+      MaxElement: 10000
+    - Name: Cache.LoginCheck
+      ServiceId: RedisCacheFactory
+      Eternal: false
+      TimeToLive: 7200
+      TimeToIdle: 0
+      EvictionPolicy: LRU
+      MaxElement: 0
+    - Name: Cache.HotRank
+      ServiceId: RedisCacheFactory
+      Eternal: false
+      TimeToLive: 43200
+      TimeToIdle: 43200
+      EvictionPolicy: LRU
+      MaxElement: 10000
+
+#    - Name: Cache.StatisticsService
+#      ServiceId: RedisCacheFactory
+#      Eternal: false
+#      TimeToLive: 600
+#      TimeToIdle: 600
+#      EvictionPolicy: LRU
+#      MaxElement: 10000
+quickEntry:
+  usageSort: false
+service:
+  userConfigs:
+    - weichat.mp.appId
+    - quickEntry.usageSort
+  forwardedHost:
+  publish:
+    all: true
+    include:
+      - configSvr = FileResources
+      #      - auth = Authorize
+      #      - AccountManager
+#    exclude:
+#      - abc
+# ----------------properties-----------------------------
+system:
+  debugMode: true
+# 是否调试模式
+pty:
+  debug: true
+# 资源配置
+resources:
+  base: D:\DevWorkspace\pengesoft-production\trunk\main\JavaSource\ps-property-app\resources\product
+  custom: D:\DevWorkspace\pengesoft-production\trunk\main\JavaSource\ps-property-app\resources\project
+  #chain: PtyUserFileResources,PtyCustomFileResources,PtyBaseFileResources
+  chain: PtyCustomFileResources,PtyBaseFileResources
+
+account:
+  #是否自动创建用户
+  autoCreateUser: true
+  #自动新建的用户默认的角色ID：“游客”的角色ID
+  defaultRoleId: 45
+  #自动新建的用户默认的部门ID：“游客”的
+  defaultGroupId: 4782
+  #手机验证码时间
+  phoneCodeLimit: 3
+  #验证码长度
+  kaptcha:
+    #是否开启登录验证码 true开启  false关闭
+    enable: false
+    length: 4
+    #图形验证码模式
+    complexity: 1
+  # 密码级别, 0: 不检查强度  1: 低 2: 中 3: 高  9: 自定义，缺省0
+  passwordLevel: 0
+  # 弱密码检查
+  weakPasswordCheck: false
+  # 密码重复字母长度限制
+  repeatCharLimit: 3
+  # 密码相似度阈值
+  similarity: 0.8
+  # 自定义提示信息
+  #userDefinePwdHint:
+  # 自定义密码检查正则式
+  #userDefinePwdLevel:
+  # 登录检查
+  loginCheck:
+    # 允许检查，缺省不允许
+    enable: true
+    # 最大重试重次数,最小1，最大100
+    maxRetry: 5
+    # 账户锁定时间，最小5，最大1000
+    lockSnap: 60
+  # 会话过期时间(s),缺省值7200
+  #sessionExpire: 7200
+  # 用户口令过期时间，0表示永不过期
+  pwdExpireTime: 0
+warn:
+  enable: false
+  ruleScanInterval: 5000
+
+#微信相关配置 目前仅支持配置公众号或小程序其中一种
+weichat:
+  #微信授权绑定页面
+  bindUrl: /WxMobBind.html
+  #微信语音结果跳转地址
+  deployUrl: https://fc.mypy.cn/votedev/we/
+  voice:
+    #支持微信语音转文字 WX，讯飞语音转文字 XF
+    service: WX
+    # 讯飞appid
+    appid: f1d05b48
+    # 讯飞secretKey
+    secretKey: 9828a69e166ab9f7a899812e7d134a2c
+    sliceSice: 10485760
+  # 需微信证的路径
+  #authPaths:
+  #- /wx/**
+  # 需在微信端登录的路径
+  #loginPaths:
+  #- /wxlogin/**
+
+  #公众号配置
+  mp:
+    enable: true
+    appId: wx17e67fc1872246e1
+    secret: eab9cdf04026b0325b0b9cb52fb1c436
+    token: Dwt_MSkUTDSgKg3D3D
+    aeskey:
+  #小程序配置
+  mpa:
+    enable: false
+    #使用小程序时是否自动创建用户
+    autoCreateUser: true
+    #使用用户Id类型 0 openId 1 unionId
+    idtype: 0
+    appId: wx9c0d34f3a4e489b6
+    secret: 00d128d9a41c226212d1be350eba0bc9
+    token:
+    aeskey:
+
+notifyMsg:
+  # none,无,就是不会发送消息;local,本地消息管理及路由;remote,远程
+  mode: local
+  #远程服务地址，
+  remoteUrl: http://oa.p9i.cn/Service/MsgNotifySMSJson.assx
+  email:
+    enable: true
+    host: smtp.qq.com
+    port: 25
+    username: 1223193915@qq.com
+    password: xsfsnluiypaqfjhd
+  sms:
+    enable: true
+    url: http://pub.mypy.cn/Gen/Service/MsgSvrJson.assx
+  # 工作模式 async: 异步  sync: 同步
+  workMode: sync
+  # 最大重试次数，缺省3次
+  #maxRetry: 3
+  # 发送缓冲检查间隔(秒), 缺省30分钟
+  #sendCheckInterval: 1800
+  # 本地模式下，使用RabbitMq缓冲消息，默认为 false，需配置RabbitMq参数在properties中定义
+  useMq: false
+  # 本地模式下，数据库缓冲配置
+  thread:
+    # 使用线程发送（数据库作为缓冲），默认为 true
+    enable: true
+    # 核心线程数
+    corePoolSize: 3
+    # 最大线程数
+    maximumPoolSize: 6
+    # 超过 corePoolSize 线程数量的线程最大空闲时间
+    keepAliveTime: 2
+    # 工作队列长度
+    workQueuelen: 1000
+
+#----------------spring-xml------------------
+report:
+  # none 无 ；local 本地报表引擎 ； remote 远程报表引擎
+  mode: remote
+  # 字体路径
+  fontsPath: /fonts
+  # 报表图片相对resources配置目录下的相对目录
+  imgBase: report
+  # 报表本地缓存地址，支持第二次调用使用Id
+  #cachePath:
+  # 本地报表引擎表达式解析类
+  #expressClassName: pengesoft.print.PageExpress
+  # 远程报表引擎 URL
+  remoteUrl: http://api.s9i.cn/report/Service/ReportJson.assx
+  # EChart后端渲染引擎
+  # echartEngine: http://172.16.85.110:8092/api/echartsCanvas.assx
+  echartEngine: http://10.1.2.73:8092/api/echartsCanvas.assx
+  # 渲染引擎缓存目录(不配置表示不使用缓存)
+  renderCacheRoot: temp/chartCache
+
+accessory:
+  #存储根路径
+  root: temp/upload
+  #零时文件路径
+  temporaryFile: temp/upload/temp
+  #目录划分格式 (格式支持：yyyy,yyyyMM,yyyyMMdd)
+  pathSplit: yyyyMM
+  # 可上传附件文件类型 (仅限制后端) 未配置时不进行限制 多个类型使用,分隔
+  uploadableFileTypes: "pdf,doc,xls,wps,jpg,jpeg,png,gif,tif,bmp,dwg,html,rtf,xml,zip,docx,xlsx,rar,psd,mdb,wpd,eps,ps,qdf,pwl,wav,avi,ram,rm,mpg,mov,asf,mid"
+
+notifyMsgService:
+  url: http://oa.p9i.cn/Service/MsgNotifySMSJson.assx
+
+workflow:
+  task:
+    #任务超期完成状态消息 默认 超期{0}天完成
+    statusOverdueFinishedMsg:
+    #任务已超期状态消息 默认 已超期{0}天
+    statusFinishedOverdueMsg:
+    #任务即将到期状态消息 默认 还有{0}天到期
+    statusExpiringMsg:
+    #任务完成计算单位 workingDay 工作日 naturalDay 自然日 默认为工作日
+    timeLimiteUnit:
+    #距离结束时间第几天提醒到期时间 默认为3天
+    remindDayFromExpiry:
+#假期服务配置
+holiday:
+  #假期服务定义数据存储路径 默认 work-data/temp/holiday
+  temporaryFilePath:
+  #远程假期定义服务地址 默认 https://pub.mypy.cn/Gen/Service/HolidayJson.assx
+  remoteUrl:
+
+#上报平台，选择上报对象自定义标签，默认配置一个，可根据需要调整
+reported:
+  tagType:
+    - Name: TIME_TAG
+      Value: 时间标签类型
+      Order: 1
+  departmentId: 3
+#--------------------以上为通用平台相关配置---------
+
+ps:
+  property:
+    # 应用配置
+    appSetting:
+      # 系统初始日期
+      InitDate: 2018-01-01
+      # 水印
+      Watermark:
+        # 是否启用水印
+        Enable: true
+        #水印文字内容
+        Content: "住宅专项维修资金管理系统"
+        #各报表水印文字配置列表
+        ConfigList:
+          _Items:
+            - Key: 物业系统/单据/业务申请表/物业服务企业注册申请表
+              Value: 自定义的水印无效
+            - Key: 物业系统/单据/业务申请表/普通使用备案申请表
+              Value: 修改的水印
+      # （统计）归集类业务标识
+      DepositMarks:
+        [
+          "开发商交款",
+          "业主交款",
+          "公有售房单位交款",
+          "公共收益交款",
+          "资金分摊",
+        ]
+      # （统计）使用类业务标识
+      UseMarks: ["维修使用"]
+      # （统计）退款类业务标识
+      RefundMarks: ["开发商退款", "业主退款", "房屋退款", "公有售房单位退款"]
+      # （统计）收益类业务标识
+      IncomeMarks: ["收益分摊"]
+      # （统计）公共收益类业务标识
+      CommonIncomeMarks: ["公共收益交款"]
+      # 银行主动发起增值时系统使用的业务类型
+      BankIncremenBisType: appreciation-apply
+      # 银行主动发起增值返还业务
+      BankBackIncremenBisType: appreciation-return
+      # 是否支持退款到余额账户
+      SupportRefundToBalanceAccount: true
+      # 允许银行确认业务后撤销业务的时限范围（单位：小时）
+      UnConfirmTimeLimit: 24
+      # 面积精确位数
+      AreaScale: 2
+      EaHousePayBusinessTypes:
+        ["build-unit-pay-house", "build-unit-print-paymt", "pub-house-unit-pay"]
+      # 利率
+      InterestRate: 0.0035
+      # 电子票据是否入库即领用
+      ElectronicBillAutoReceive: false
+      #流程是否相同任务不同操作人
+      SameTaskDiffHandler: true
+      # 流水登记业务标识
+      BusinessMark:
+        _Items:
+          - Key: 登记活期利息
+            Value: 活期利息
+          - Key: 登记增值收益
+            Value: 增值收益
+      # 数据加密
+      DataEncryption: false
+    # 客户信息配置
+    customInfo:
+      CityName: 成都市
+      CityCode: 510100
+      CustomName: 成都市维修资金管理中心
+      OfficeAddress: 人民中路一段28号成都房地产大厦21层
+      OfficeContactTel: 028-84732766
+      WebUrl: www.xxx.com
+      AcceptAddress: 成都市青羊区西华门街24号1楼23-25号窗口
+      AcceptContactTel: 028-84766352
+    #账户类型配置
+    accountConfig:
+      #物业区域、楼栋、单元、房屋需要开设的账户
+      EaAreaAccountTypes:
+        [
+          "商品房维修资金",
+          "日常维修金",
+          "电梯专项资金",
+          "公房维修资金",
+          "公共收益",
+        ]
+      #开发商需要开设的账户
+      BuildUnitAccountTypes: ["开发商账户"]
+      #公房单位需要开设的账户
+      PubHouseUnitAccountTypes: ["公有售房单位账户"]
+      #保修金需开设的账户
+      WarrantyAccountTypes: ["保修金账户"]
+      #是否开启银行结算账户
+      #AllowBankFinalAccount: ['ea-area-reg','ea-house-reg']
+    #
+    #    #资金类型配置
+    #    foundTypeConfig:
+    #      _Items:
+    #        #资金类型名称
+    #        - TypeName: 分户日常维修金
+    #          #摘要（将作为应交资金显示的名称）
+    #          Summary: 分户日常维修金
+    #          #交存主体(取值EFoundDepositor 1业主 2开发建设单位 3物业服务企业 4公有售房单位 5业委会)
+    #          Depositor: 1
+    #          #交存目标,（对谁交存的，比如对房屋交存，则应交款计算后关联在房屋上）（取值EEaAreaLevel 1物业区域 2楼栋 3单元 4房屋）
+    #          Target: 4
+    #          #交存账户的级别，（指交存后放在哪一级账户上，如果为0，则target保持一致，与accountType一起确认，此资金最终存放在哪个账户）（取值EEaAreaLevel）
+    #          AccountLevel: 4
+    #          #存放资金的账户类型
+    #          AccountType: 日常维修金
+    #          #交存周期,取值（EPayPeriod 1仅交一次 2按月）
+    #          PayPeriod: 1
+    #        #资金类型名称
+    #        - TypeName: 分户维修资金
+    #          #摘要（将作为应交资金显示的名称）
+    #          Summary: 分户维修资金
+    #          #交存主体(取值EFoundDepositor 1业主 2开发建设单位 3物业服务企业 4公有售房单位 5业委会)
+    #          Depositor: 1
+    #          #交存目标,（对谁交存的，比如对房屋交存，则应交款计算后关联在房屋上）（取值EEaAreaLevel 1物业区域 2楼栋 3单元 4房屋）
+    #          Target: 4
+    #          #交存账户的级别，（指交存后放在哪一级账户上，如果为0，则target保持一致，与accountType一起确认，此资金最终存放在哪个账户）（取值EEaAreaLevel）
+    #          AccountLevel: 4
+    #          #存放资金的账户类型
+    #          AccountType: 商品房维修资金
+    #          #交存周期,取值（EPayPeriod 1仅交一次 2按月）
+    #          PayPeriod: 1
+    #        #资金类型名称
+    #        - TypeName: 楼栋维修资金
+    #          #摘要（将作为应交资金显示的名称）
+    #          Summary: 维修资金
+    #          #交存主体(取值EFoundDepositor 1业主 2开发建设单位 3物业服务企业 4公有售房单位 5业委会)
+    #          Depositor: 2
+    #          #交存目标,（对谁交存的，比如对房屋交存，则应交款计算后关联在房屋上）（取值EEaAreaLevel 1物业区域 2楼栋 3单元 4房屋）
+    #          Target: 2
+    #          #交存账户的级别，（指交存后放在哪一级账户上，如果为0，则target保持一致，与accountType一起确认，此资金最终存放在哪个账户）（取值EEaAreaLevel）
+    #          AccountLevel: 2
+    #          #存放资金的账户类型
+    #          AccountType: 商品房维修资金
+    #          #交存周期,取值（EPayPeriod 1仅交一次 2按月）
+    #          PayPeriod: 1
+    #        #资金类型名称
+    #        - TypeName: 楼栋电梯专项资金
+    #          #摘要（将作为应交资金显示的名称）
+    #          Summary: 电梯专项资金
+    #          #交存主体(取值EFoundDepositor 1业主 2开发建设单位 3物业服务企业 4公有售房单位 5业委会)
+    #          Depositor: 2
+    #          #交存目标,（对谁交存的，比如对房屋交存，则应交款计算后关联在房屋上）（取值EEaAreaLevel 1物业区域 2楼栋 3单元 4房屋）
+    #          Target: 2
+    #          #交存账户的级别，（指交存后放在哪一级账户上，如果为0，则target保持一致，与accountType一起确认，此资金最终存放在哪个账户）（取值EEaAreaLevel）
+    #          AccountLevel: 2
+    #          #存放资金的账户类型
+    #          AccountType: 电梯专项资金
+    #          #交存周期,取值（EPayPeriod 1仅交一次 2按月）
+    #          PayPeriod: 1
+
+    #    warrantyFoundTypeConfig:
+    #      _Items:
+    #        #资金类型名称
+    #        - TypeName: 保修金
+    #          #摘要（将作为应交资金显示的名称）
+    #          Summary: 保修金
+    #          #存放资金的账户类型
+    #          AccountType: 保修金账户
+    # 通知类型配置
+    #    notificationConfig:
+    #      balance-notify:
+    #        NotificationMarks: [ '维修使用','结息' ]
+    #        UnNotificationMarks: [ '结息' ]
+    #        NotificationStartTime: 2021-05-03
+    #        NotificationWay: SMS
+    #        NotificationTemplateId: 账户余额变动通知
+
+    # 业务配置
+    businessConfig:
+      #机构管理
+      build-unit-reg:
+        Name: 开发商注册
+        BusinessService: pengesoft.property.businessservice.orgbusiness.IBuildUnitRegBusinessDocMgeSvr
+        FlowFile: 开发建设单位注册.wkf
+        ShowView: tab://app-business-show-task-view?child=app-build-unit-reg-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-build-unit-reg-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/开发建设单位备案申请表"}]}
+        PrintAcceptNotice: false # 默认不配置，值为true
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 资质证书原件（复印件）
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 1
+              Name: 营业执照副本原件（复印件）
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 2
+              Name: 统一社会信用代码证扫描件（复印件）
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+        BusinessNotify: false # 默认不配置，值为false（不进行消息通知）
+      pub-house-unit-reg:
+        Name: 公房单位注册
+        BusinessCodeTypeCode: 012
+        BusinessService: pengesoft.property.businessservice.orgbusiness.IPubHouseUnitRegBusinessDocMgeSvr
+        FlowFile: 公有售房单位注册.wkf
+        ShowView: tab://app-business-show-task-view?child=app-pub-house-unit-reg-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-pub-house-unit-reg-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/公有售房单位备案申请表"}]}
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 统一社会信用代码证
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 100
+              AllowMultiple: true
+      owner-team-reg:
+        Name: 业委会注册
+        BusinessService: pengesoft.property.businessservice.orgbusiness.IOwnerTeamRegBusinessDocMgeSvr
+        FlowFile: 业主委员会单位注册.wkf
+        ShowView: tab://app-business-show-task-view?child=app-owner-team-reg-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-owner-team-reg-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/业委会注册申请表"}]}
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 组织机构代码证原件（复印件）
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 1
+              Name: 资质证书原件（复印件）
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 2
+              Name: 营业执照副本原件（复印件）
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+      property-owner-team-record:
+        Name: 业委会备案
+        BusinessService: pengesoft.property.businessservice.orgbusiness.IOwnerTeamRegBusinessDocMgeSvr
+        FlowFile: 物业系统业委会备案.wkf
+        ShowView: tab://app-business-show-task-view?child=app-property-committee-record-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-property-committee-record-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/业委会备案申请表"}]}
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 组织机构代码证原件（复印件）
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 1
+              Name: 资质证书原件（复印件）
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 2
+              Name: 营业执照副本原件（复印件）
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+      realty-mge-com-reg:
+        Name: 物管企业注册
+        BusinessService: pengesoft.property.businessservice.orgbusiness.IRealtyMgeComRegBusinessDocMgeSvr
+        FlowFile: 物业服务企业单位注册.wkf
+        ShowView: tab://app-business-show-task-view?child=app-realty-mge-com-reg-summary-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/物业服务企业注册申请表"}]}&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-realty-mge-com-reg-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/物业服务企业注册申请表"}]}
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 资质证书原件（复印件）
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 1
+              Name: 营业执照副本原件（复印件）
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 2
+              Name: 统一社会信用代码证扫描件（复印件）
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+      property-realty-mge-com-record:
+        Name: 物业服务企业备案
+        BusinessService: pengesoft.property.businessservice.orgbusiness.IRealtyMgeComRegBusinessDocMgeSvr
+        FlowFile: 物业服务企业备案.wkf
+        ShowView: tab://app-business-show-task-view?child=app-property-company-record-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-property-company-record-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/物业服务企业备案申请表"}]}
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 资质证书原件（复印件）
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 1
+              Name: 营业执照副本原件（复印件）
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 2
+              Name: 统一社会信用代码证扫描件（复印件）
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+
+      property-undertake-inspection-record:
+        Name: 承接查验备案
+        BusinessService: pengesoft.property.businessservice.eaareabusiness.IUndertakeInspectionBusinessDocMgeSvr
+        FlowFile: 承接查验备案.wkf
+        ShowView: tab://app-business-show-task-view?child=app-property-undertake-inspection-record-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-property-undertake-inspection-record-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/承接查验备案申请表"}]}
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 前期物业服务合同备案回执
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+            - Key: 1
+              Name: 临时管理规约
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+            - Key: 2
+              Name: 物业承接查验协议
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+            - Key: 3
+              Name: 查验记录
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+            - Key: 4
+              Name: 交接记录
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+            - Key: 5
+              Name: 其他承接查验有关的文件
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+
+      owner-team-chg-term-apply:
+        Name: 业主委员会换届备案
+        BusinessService: pengesoft.property.businessservice.demobusiness.IDemoBusinessDocMgeSvr
+        FlowFile: 业主委员会换届备案.wkf
+        ShowView: tab://app-business-show-task-view?child=app-owner-team-chg-term-apply-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-owner-team-chg-term-apply-edit-view
+      # 机构信息变更
+      build-unit-info-chg:
+        Name: 开发建设单位信息修改
+        BusinessService: pengesoft.property.businessservice.orgbusiness.OrganizationInfoChgBusinessDocMgeSvr
+        FlowFile: 开发建设单位信息变更.wkf
+        ShowView: tab://app-business-show-task-view?child=app-build-unit-information-change-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-build-unit-information-change-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/机构信息修改申请表"}]}
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 资质证书原件（复印件）
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 1
+              Name: 营业执照副本原件（复印件）
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 2
+              Name: 统一社会信用代码证扫描件（复印件）
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+        ExConfig:
+          OrgInfoChgRunSvr: pengesoft.property.businessservice.orgbusiness.BuildUnitInfoChgBusinessSvr
+      pub-house-unit-info-chg:
+        Name: 公有售房单位信息修改
+        BusinessService: pengesoft.property.businessservice.orgbusiness.OrganizationInfoChgBusinessDocMgeSvr
+        FlowFile: 公有售房单位信息变更.wkf
+        ShowView: tab://app-business-show-task-view?child=app-pub-house-unit-information-change-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-pub-house-unit-information-change-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/机构信息修改申请表"}]}
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 资质证书原件（复印件）
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 1
+              Name: 营业执照副本原件（复印件）
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 2
+              Name: 统一社会信用代码证扫描件（复印件）
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+        ExConfig:
+          OrgInfoChgRunSvr: pengesoft.property.businessservice.orgbusiness.PubHouseUnitInfoChgBusinessSvr
+      owner-team-info-chg:
+        Name: 业委会信息修改
+        BusinessService: pengesoft.property.businessservice.orgbusiness.OrganizationInfoChgBusinessDocMgeSvr
+        FlowFile: 业委会信息变更.wkf
+        ShowView: tab://app-business-show-task-view?child=app-owner-team-information-change-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-owner-team-information-change-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/机构信息修改申请表"}]}
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 资质证书原件（复印件）
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 1
+              Name: 营业执照副本原件（复印件）
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 2
+              Name: 统一社会信用代码证扫描件（复印件）
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+        ExConfig:
+          OrgInfoChgRunSvr: pengesoft.property.businessservice.orgbusiness.OwnerTeamInfoChgBusinessSvr
+      realty-mge-com-info-chg:
+        Name: 物业服务企业信息修改
+        BusinessService: pengesoft.property.businessservice.orgbusiness.OrganizationInfoChgBusinessDocMgeSvr
+        FlowFile: 物业服务企业信息变更.wkf
+        ShowView: tab://app-business-show-task-view?child=app-realty-mge-information-change-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-realty-mge-information-change-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/机构信息修改申请表"}]}
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 资质证书原件（复印件）
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 1
+              Name: 营业执照副本原件（复印件）
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 2
+              Name: 统一社会信用代码证扫描件（复印件）
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+        ExConfig:
+          OrgInfoChgRunSvr: pengesoft.property.businessservice.orgbusiness.RealtyMgeComInfoChgBusinessSvr
+      #物业区域管理
+      ea-area-reg:
+        Name: 物业区域信息采集
+        BusinessService: pengesoft.property.businessservice.eaareabusiness.IEaAreaRegBusinessDocMgeSvr
+        FlowFile: 物业区域备案.wkf
+        ShowView: tab://app-business-show-task-view?child=app-ea-area-reg-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-ea-area-reg-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/物业区域备案申请表"},{"btnName":"打印分户清册","report":"物业系统/单据/业务申请表/物业区域备案分户清册"}]}
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 物业服务企业营业执照正、副本
+              FileType: ".jpg,.gif,.png,.rar,.zip"
+              MaxFileSize: 4096
+              Required: false
+              ExtAttributes:
+                A: "abc"
+              Type: 2
+            - Key: 1
+              Name: 《建设用地规划许可证》及附图
+              FileType: ".jpg,.gif,.png,.rar,.zip"
+              MaxFileSize: 4096
+            - Key: 2
+              Name: 建设项目修建性详细规划或者建设工程设计方案总平面图
+              FileType: ".jpg,.gif,.png,.rar,.zip"
+              MaxFileSize: 4096
+            - Key: 3
+              Name: 物业管理用房坐落位置、建筑面积资料
+              FileType: ".jpg,.gif,.png,.rar,.zip"
+              MaxFileSize: 4096
+            - Key: 4
+              Name: 地名批复文件
+              FileType: ".jpg,.gif,.png,.rar,.zip"
+              MaxFileSize: 4096
+      property-ea-area-reg:
+        Name: 物业系统物业区域备案
+        BusinessService: pengesoft.property.businessservice.eaareabusiness.IEaAreaRegBusinessDocMgeSvr
+        FlowFile: 物业系统物业区域备案.wkf
+        ShowView: tab://app-business-show-task-view?child=app-property-ea-area-summary-view
+        EditView: tab://app-business-edit-task-view?child=app-property-ea-area-reg-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/物业系统物业区域备案申请表"}]}
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 建设工程规划许可证
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              Required: false
+              ExtAttributes:
+                A: "abc"
+            - Key: 1
+              Name: 商品房预售许可证
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+            - Key: 2
+              Name: 房屋面积实测绘报告
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+            - Key: 3
+              Name: 划分物业管理区域的批复
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+            - Key: 4
+              Name: 工程竣工备案证书
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+            - Key: 5
+              Name: 总平面图
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+      ea-area-info-chg:
+        Name: 物业区域信息变更
+        BusinessService: pengesoft.property.businessservice.eaareabusiness.IEaAreaInfoChgBusinessDocMgeSvr
+        FlowFile: 物业区域信息变更.wkf
+        ShowView: tab://app-business-show-task-view?child=app-ea-area-info-chg-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-ea-area-info-chg-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/物业区域信息变更申请表"}]}
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 建设工程规划许可证
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+            - Key: 1
+              Name: 商品房预售许可证
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+            - Key: 2
+              Name: 房屋面积实测绘报告
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+            - Key: 3
+              Name: 划分物业管理区域的批复
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+            - Key: 4
+              Name: 工程竣工备案证书
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+            - Key: 5
+              Name: 总平面图
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+      ea-area-split:
+        Name: 物业区域拆分合并
+        BusinessService: pengesoft.property.businessservice.eaareabusiness.IEaAreaSplitBusinessDocMgeSvr
+        FlowFile: 物业区域拆分合并.wkf
+        ShowView: tab://app-business-show-task-view?child=app-ea-area-split-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-ea-area-split-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/物业区域拆分合并申请表"}]}
+        PushFinRecord: true
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 划分物业管理区域的批复
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+      win-bid-record:
+        Name: 物业中标备案
+        BusinessService: pengesoft.property.businessservice.eaareabusiness.IWinBidBusinessDocMgeSvr
+        FlowFile: 物业中标备案.wkf
+        ShowView: tab://app-business-show-task-view?child=app-win-bid-record-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-win-bid-record-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/物业中标备案申请表"}]}
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 中标通知书
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+      ea-build-info-chg:
+        Name: 楼栋信息变更
+        BusinessService: pengesoft.property.businessservice.eaareabusiness.IEaBuildInfoChgBusinessMgeSvr
+        FlowFile: 楼栋信息变更.wkf
+        ShowView: tab://app-business-show-task-view?child=app-ea-build-info-chg-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-ea-build-info-chg-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/楼栋信息变更申请表"}]}
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 楼栋信息变更情况说明表
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 1
+              Name: 证明文件
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+      ea-house-reg:
+        Name: 房屋补充
+        BusinessService: pengesoft.property.businessservice.eaareabusiness.IEaHouseRegBusinessDocMgeSvr
+        FlowFile: 房屋补充.wkf
+        ShowView: tab://app-business-show-task-view?child=app-ea-house-reg-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-ea-house-reg-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/房屋补充申请表"},{"btnName":"打印分户清册","report":"物业系统/单据/业务申请表/房屋补充分户清册"}]}
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 建设工程规划许可证
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 1
+              Name: 商品房预售许可证
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 2
+              Name: 房屋面积实测绘报告
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 3
+              Name: 工程竣工备案证书
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 4
+              Name: 总平面图
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+      ea-house-un-reg:
+        Name: 房屋注销
+        BusinessService: pengesoft.property.businessservice.eaareabusiness.IEaHouseUnRegBusinessDocMgeSvr
+        FlowFile: 房屋注销.wkf
+        ShowView: tab://app-business-show-task-view?child=app-ea-house-unreg-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-ea-house-un-reg-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/房屋注销申请表"}]}
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 注销住宅专项维修资金情况说明
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 1
+              Name: 业主有效身份证件复印件
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 2
+              Name: 房屋所有权证注销证明（或拆迁补偿安置协议等）
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+      ea-house-info-chg:
+        Name: 房屋信息变更
+        BusinessService: pengesoft.property.businessservice.eaareabusiness.IEaHouseInfoChgBusinessDocMgeSvr
+        FlowFile: 房屋信息变更.wkf
+        ShowView: tab://app-business-show-task-view?child=app-ea-house-info-chg-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-ea-house-info-chg-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/房屋信息变更申请表"},{"btnName":"打印清册","report":"物业系统/单据/业务申请表/房屋信息变更分户清册"}]}
+        ExConfig:
+          RefreshEaShouldFundMoney: true
+          EnableRefund: false #是否启用退款
+          RefundThreshold: 0.00 #退款阈值
+          EnablePay: false #是否启用交款
+          PayThreshold: 0.00 #交款阈值
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 地名证明文件
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 1
+              Name: 实测绘报告扫描件
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 2
+              Name: 证明文件
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+      eahouse-pubhouse-chg:
+        Name: 房屋公房变更
+        BusinessService: pengesoft.property.businessservice.eaareabusiness.IEaHousePubHouseChangeBusinessDocMgeSvr
+        FlowFile: 房屋公房变更.wkf
+        ShowView: tab://app-business-show-task-view?child=app-ea-house-pub-house-chg-summary-view
+        EditView: tab://app-business-edit-task-view?child=app-ea-house-pub-house-chg-edit-view
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 房屋公房变更资料说明
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+      ea-house-split:
+        Name: 房屋拆分合并
+        BusinessService: pengesoft.property.businessservice.eaareabusiness.IEaHouseSplitBusinessDocMgeSvr
+        FlowFile: 房屋拆分合并.wkf
+        ShowView: tab://app-business-show-task-view?child=app-ea-house-split-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-ea-house-split-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/房屋拆分合并申请表"},{"btnName":"打印清册","report":"物业系统/单据/业务申请表/房屋拆分合并分户清册"}]}
+        ExConfig:
+          RefreshEaShouldFundMoney: true
+          EnableRefund: false #是否启用退款
+          RefundThreshold: 0.00 #退款阈值
+          EnablePay: false #是否启用交款
+          PayThreshold: 0.00 #交款阈值
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 预测绘报告/实测绘报告
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+      ea-house-ownership-chg:
+        Name: 权属更新
+        BusinessService: pengesoft.property.businessservice.eaareabusiness.IEaHouseOwnerShipChgBusinessDocMgeSvr
+        FlowFile: 房屋权属变更.wkf
+        ShowView: tab://app-business-show-task-view?child=app-ea-house-ownership-chg-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-ea-house-ownership-chg-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/房屋权属信息更新申请表"}]}
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 房屋所有权证或不动产权证/购房合同复印件
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 1
+              Name: 现业主有效身份证件复印件
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+
+      batch-ea-house-ownership:
+        Name: 权属批量更新
+        BusinessService: pengesoft.property.businessservice.eaareabusiness.IBatchEaHouseOwnerShipChgBusinessDocMgeSvr
+        FlowFile: 批量房屋权属变更.wkf
+        ShowView: tab://app-business-show-task-view?child=app-batch-ea-house-ownership-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-batch-ea-house-ownership-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/批量房屋权属信息更新申请表"}]}
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 房屋所有权证或不动产权证/购房合同复印件
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 1
+              Name: 现业主有效身份证件复印件
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+      integrity-registration:
+        Name: 诚信登记
+        BusinessService: pengesoft.property.businessservice.integrity.IIntegrityRegisterBusinessDocMgeSvr
+        FlowFile: 诚信登记.wkf
+        ShowView: tab://app-business-show-task-view?child=app-integrity-registration-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-integrity-registration-edit-view
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 相关资料1
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 1
+              Name: 相关资料2
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+      #交款
+      build-unit-pay-build:
+        Name: 开发商交款
+        BusinessService: pengesoft.property.businessservice.paybusiness.IBuildUnitPayBuildBusinessDocMgeSvr
+        FlowFile: 开发商按栋交款.wkf
+        ShowView: tab://app-business-show-task-view?child=app-build-unit-pay-by-building-sumamry-view&childparams={enableDefaultPrint=false}&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-build-unit-pay-by-building-edit-view
+        PushFinRecord: true
+        Mark: 开发商交款
+        ExConfig:
+          Depositors: #见枚举 EFoundDepositor
+            - 2 # 开发建设单位
+          PeriodValidity: 0
+          AllowChildAccount: false
+      build-unit-pay-house:
+        Name: 开发商代交款
+        BusinessService: pengesoft.property.businessservice.paybusiness.IBuildUnitPayHouseBusinessDocMgeSvr
+        FlowFile: 开发商按户交款.wkf
+        ShowView: tab://app-business-show-task-view?child=app-build-unit-pay-house-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-build-unit-pay-house-edit-view
+        PushFinRecord: true
+        Mark: 开发商代交款
+        ExConfig:
+          Depositors: #见枚举 EFoundDepositor
+            - 1 # 业主
+          PeriodValidity: 0
+          AllowChildAccount: false
+      modify-shouldfund-money:
+        Name: 应交款调整
+        BusinessService: pengesoft.property.businessservice.eaareabusiness.IEaModifyShouldFundMoneyDocMgeSvr
+        FlowFile: 应交款调整.wkf
+        ShowView: tab://app-business-show-task-view?child=app-payable-adjustment-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-payable-adjustment-edit-view
+        PushFinRecord: true
+        Mark: 应交款调整
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 应交款调整资料
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+      receive-account-modify:
+        Name: 修改收款账户
+        BusinessService: pengesoft.property.businessservice.financebusiness.IReceiveAccountModifyBusinessDocMgeSvr
+        FlowFile: 修改收款账户.wkf
+        ShowView: tab://app-business-show-task-view?child=app-modify-receiving-account-information-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-modify-receiving-account-information-edit-view
+        PushFinRecord: true
+        Mark: 修改收款账户
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 修改收款账户资料
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+      build-unit-print-paymt:
+        Name: 代打通知单
+        BusinessService: pengesoft.property.businessservice.paybusiness.IOwnerPayBusinessDocMgeSvr
+        FlowFile: 开发商代打通知单.wkf
+        ShowView: tab://app-business-show-task-view?child=app-build-unit-print-paymt-notice-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-build-unit-print-paymt-notice-edit-view&taskCfg={"bills":[{"btnName":"打印交款通知单","report":"物业系统/单据/通知单/交款通知单_带明细"}]}
+        PushFinRecord: true
+        Mark: 业主交款
+        ExConfig:
+          Depositors: #见枚举 EFoundDepositor
+            - 1 # 业主
+          PeriodValidity: 0
+      batch-build-unit-print-paymt:
+        Name: 批量代打通知单
+        BusinessService: pengesoft.property.businessservice.paybusiness.IBatchOwnerPayBusinessDocMgeSvr
+        FlowFile: 开发商批量代打通知单.wkf
+        ShowView: tab://app-business-show-task-view?child=app-build-unit-batch-print-paymt-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-build-unit-batch-print-paymt-view&taskCfg={"bills":[{"btnName":"打印交款通知单","report":"物业系统/单据/通知单/批量代打交款通知单"}]}
+        PushFinRecord: true
+        Mark: 批量代打通知单
+        ExConfig:
+          Depositors: #见枚举 EFoundDepositor
+            - 1 # 业主
+          PeriodValidity: 0
+      pub-house-unit-pay:
+        Name: 公房交款
+        BusinessService: pengesoft.property.businessservice.paybusiness.IPubHousePayBusinessDocMgeSvr
+        FlowFile: 公有售房单位交款.wkf
+        ShowView: tab://app-business-show-task-view?child=app-pub-house-unit-pay-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-pub-house-unit-pay-edit-view&taskCfg={"bills":[{"btnName":"打印交款通知单","report":"物业系统/单据/通知单/交款通知单_带明细"},{"btnName":"打印交款清册","report":"物业系统/单据/通知单/交款清册"}]}
+        PushFinRecord: true
+        Mark: 公房交款
+        ExConfig:
+          Depositors: #见枚举 EFoundDepositor
+            - 4 # 公有售房单位
+            - 1 # 业主
+          PeriodValidity: 0
+          AllowChildAccount: false
+      public-income-pay:
+        Name: 公共收益交款
+        BusinessService: pengesoft.property.businessservice.paybusiness.IPublicIncomePayBusinessDocMgeSvr
+        FlowFile: 公共收益交款.wkf
+        ShowView: tab://app-business-show-task-view?child=app-public-income-pay-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-public-income-pay-edit-view&taskCfg={"bills":[{"btnName":"打印交款通知单","report":"物业系统/单据/通知单/交款通知单_公共收益"}]}
+        PushFinRecord: true
+        Mark: 公共收益交款
+        ExConfig:
+          PeriodValidity: 0
+          IncomeRangeArea: true
+          IncomeRangeBuild: true
+          IncomeRangeUnit: true
+          ShareToHome: true
+          PayAccountType: 公共收益 #交款账户类型
+      unit-account-pay:
+        Name: 单位账户交款
+        BusinessService: pengesoft.property.businessservice.paybusiness.IUnitAccountPayBusinessDocMgeSvr
+        FlowFile: 单位账户交款.wkf
+        ShowView: tab://app-business-show-task-view?child=app-unit-account-pay-summary-view&taskCfg={"bills":[{"btnName":"打印交款通知单","report":"物业系统/单据/通知单/交款通知单"}]}&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-unit-account-pay-edit-view&taskCfg={"bills":[{"btnName":"打印交款通知单","report":"物业系统/单据/通知单/交款通知单"}]}
+        PushFinRecord: true
+        Mark: 单位账户交款
+        ExConfig:
+          AllowChildAccount: false
+      finance-verify:
+        Name: 财务核销
+        BusinessService: pengesoft.property.businessservice.billbusiness.IFinanceVerifyBusinessDocMgeSvr
+        FlowFile: 财务核销.wkf
+        ShowView: tab://app-business-show-task-view?child=app-finance-verify-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-finance-verify-edit-view
+      #退款
+      unit-account-refund:
+        Name: 单位账户退款
+        BusinessService: pengesoft.property.businessservice.refundbusiness.IUnitAccountRefundBusinessMgeSvr
+        FlowFile: 单位账户退款.wkf
+        ShowView: tab://app-business-show-task-view?child=app-unit-account-refund-summary-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/单位账户退款申请表"}]}&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-unit-account-refund-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/单位账户退款申请表"}]}
+        PushFinRecord: true
+        Mark: 单位账户退款
+      public-house-unit-refund:
+        Name: 公房退款
+        BusinessService: pengesoft.property.businessservice.refundbusiness.IPubHouseRefundBusinessMgeSvr
+        FlowFile: 公有售房单位退款.wkf
+        ShowView: tab://app-business-show-task-view?child=app-public-house-unit-refund-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-public-house-unit-refund-edit-view
+        PushFinRecord: true
+        Mark: 公房退款
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 退款附件1
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 1
+              Name: 退款附件2
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+        ExConfig:
+          PayTypes:
+            - pub-house-unit-pay
+      build-unit-refund:
+        Name: 开发商退款
+        BusinessService: pengesoft.property.businessservice.refundbusiness.IBuildUnitRefundBusinessMgeSvr
+        FlowFile: 开发建设单位退款.wkf
+        ShowView: tab://app-business-show-task-view?child=app-build-unit-refund-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-build-unit-refund-edit-view
+        PushFinRecord: true
+        Mark: 开发商退款
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 退款附件1
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 1
+              Name: 退款附件2
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+        ExConfig:
+          PayTypes:
+            - build-unit-pay-build
+            - build-unit-pay-house
+      owner-refund:
+        Name: 购房人退款
+        BusinessService: pengesoft.property.businessservice.refundbusiness.IOwnerRefundBusinessMgeSvr
+        FlowFile: 业主退款.wkf
+        ShowView: tab://app-business-show-task-view?child=app-owner-refund-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-owner-refund-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/业主退款申请表"}]}
+        PushFinRecord: true
+        Mark: 业主退款
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 退款附件1
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 1
+              Name: 退款附件2
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+        ExConfig:
+          PayTypes:
+            - build-unit-print-paymt
+      house-refund:
+        Name: 房屋退款
+        BusinessService: pengesoft.property.businessservice.refundbusiness.IHouseRefundBusinessMgeSvr
+        FlowFile: 房屋退款.wkf
+        ShowView: tab://app-business-show-task-view?child=app-house-refund-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-house-refund-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/房屋退款申请表"}]}
+        PushFinRecord: true
+        Mark: 房屋退款
+        ExConfig:
+          # 退款是否注销房屋
+          NeedUnRegHouseRefundRefundNatures:
+            - 3 #灭失退款
+          # 允许退款的账户类型
+          RefundAccountTypes: []
+          # 需要结息的退款性质
+          NeedSettleInterestRefundNatures:
+            - 2 #退房退款
+            - 3 #灭失退款
+          SupportMultiReceiveAccounts: true #是否支持多账户收款，默认false，不支持
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 退款附件1
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              TaskEdit: ["审核"]
+              TaskReadOnly: ["受理"]
+            - Key: 1
+              Name: 退款附件2
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              TaskEdit: ["受理"]
+              TaskReadOnly: ["审核"]
+      ea-build-refund:
+        Name: 楼栋退款
+        BusinessService: pengesoft.property.businessservice.refundbusiness.IEaBuildRefundBusinessMgeSvr
+        FlowFile: 楼栋退款.wkf
+        ShowView: tab://app-business-show-task-view?child=app-build-refund-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-build-refund-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/楼栋退款申请表"}]}
+        PushFinRecord: true
+        Mark: 楼栋退款
+        ExConfig:
+          RefundAccountTypes: []
+          NeedSettleInterestRefundNatures:
+            - 1 #差错退款
+            - 2 #灭失退款
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 退款附件1
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 1
+              Name: 退款附件2
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+      #使用
+      simple-use-admit:
+        Name: 简单使用申请
+        BusinessService: pengesoft.property.businessservice.projectbusiness.IProjectAdmitBusinessDocMgeSvr
+        FlowFile: 简单使用申请.wkf
+        ShowView: tab://app-business-show-task-view?child=app-pro-admit-summary-view&childParams={"subProjShowPattern":"card"}&taskCfg={"bills":[{"btnName":"打印分摊清册","report":"物业系统/单据/业务申请表/项目分摊清册"}]}&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-pro-edit-simple-task-view?bisType=simple-use-admit&votePhase=简单使用&importantListConfig={"importantList":[{"DocumentName":"施工方案","FileTypes":"*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip","AllowMultiple":false,"MaxFileSize":2048,"MustUploaded":true},{"DocumentName":"施工合同","FileTypes":"*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip","AllowMultiple":false,"MaxFileSize":2048,"MustUploaded":true},{"DocumentName":"中标通知书","FileTypes":"*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip","AllowMultiple":false,"MaxFileSize":2048,"MustUploaded":false}]}
+        Mark: 维修使用
+        ExConfig:
+          ProjectType: simple-use
+          ExpendDocType: expend-apply
+          NotFreezeAdminProject: false
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 使用备案申请表
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+            - Key: 1
+              Name: 项目公示现场照片
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+            - Key: 2
+              Name: 业主意见签字表
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+            - Key: 3
+              Name: 业主签字情况公示照片
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+            - Key: 4
+              Name: 维修工程预算书
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+            - Key: 5
+              Name: 维修施工合同
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+            - Key: 6
+              Name: 发票
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+      normal-use-admit:
+        Name: 普通使用申请
+        BusinessService: pengesoft.property.businessservice.projectbusiness.IProjectAdmitBusinessDocMgeSvr
+        FlowFile: 普通使用申请.wkf
+        ShowView: tab://app-business-show-task-view?child=app-pro-admit-summary-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/普通使用备案申请表"}]}&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-pro-edit-task-view?taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/普通使用备案申请表"}]}
+        Mark: 维修使用
+        RevokeTasks: ["勘察派单"] #配置支持撤销的业务节点
+        RevokeHanders: ["PTY.ProjectAdmitBusinessDocMgeSvr"] #配置撤销数据处理
+        ExConfig:
+          ProjectType: normal-use
+          ExpendDocType: expend-apply
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 使用备案申请表
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+            - Key: 1
+              Name: 项目公示现场照片
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+            - Key: 2
+              Name: 业主意见签字表
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+            - Key: 3
+              Name: 业主签字情况公示照片
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+            - Key: 4
+              Name: 维修工程预算书
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+            - Key: 5
+              Name: 维修施工合同
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+            - Key: 6
+              Name: 发票
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              TaskNames: ["申请备案", "受理", "初审", "复审", "选择首款账号"]
+              Required: false
+      urgent-use-admit:
+        Name: 紧急使用申请
+        BusinessService: pengesoft.property.businessservice.projectbusiness.IProjectAdmitBusinessDocMgeSvr
+        FlowFile: 紧急使用申请.wkf
+        ShowView: tab://app-business-show-task-view?child=app-pro-admit-summary-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/紧急使用备案申请表"}]}&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-pro-edit-task-view?taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/紧急使用备案申请表"}]}
+        Mark: 维修使用
+        ExConfig:
+          ProjectType: urgent-use
+          ExpendDocType: expend-apply
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 使用备案申请表
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 100
+              AllowMultiple: true
+            - Key: 1
+              Name: 项目公示现场照片
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 100
+              AllowMultiple: true
+            - Key: 2
+              Name: 物业所在地街道办或居委会出具的关于发生紧急情况的书面报告
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 100
+              AllowMultiple: true
+            - Key: 3
+              Name: 维修工程预算书
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 100
+              AllowMultiple: true
+            - Key: 4
+              Name: 维修施工合同
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 100
+              AllowMultiple: true
+            - Key: 5
+              Name: 发票
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              TaskNames: ["申请备案", "受理", "初审", "复审", "选择首款账号"]
+              Required: false
+      elevator-insurance-admit:
+        Name: 电梯保险
+        BusinessService: pengesoft.property.businessservice.projectbusiness.IProjectAdmitBusinessDocMgeSvr
+        FlowFile: 电梯保险.wkf
+        ShowView: tab://app-business-show-task-view?child=app-elevator-insurance-summary-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/普通使用备案申请表"}]}&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-elevator-insurance-edit-view?taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/普通使用备案申请表"}]}
+        Mark: 维修使用
+        RevokeTasks: ["勘察派单"] #配置支持撤销的业务节点
+        RevokeHanders: ["PTY.ProjectAdmitBusinessDocMgeSvr"] #配置撤销数据处理
+        ExConfig:
+          ProjectType: elevator-insurance
+          ExpendDocType: elevator-insurance-expend-apply
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 使用备案申请表
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+            - Key: 1
+              Name: 项目公示现场照片
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+            - Key: 2
+              Name: 业主意见签字表
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+            - Key: 3
+              Name: 业主签字情况公示照片
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+            - Key: 4
+              Name: 维修工程预算书
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+            - Key: 5
+              Name: 维修施工合同
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+            - Key: 6
+              Name: 发票
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              TaskNames: ["申请备案", "受理", "初审", "复审", "选择首款账号"]
+              Required: false
+      warranty-project-admit:
+        Name: 保修金项目申请
+        BusinessService: pengesoft.property.businessservice.engineering.IWarrantyProjectAdmitDocMgeSvr
+        FlowFile: 保修金项目申请.wkf
+        ShowView: tab://app-business-show-task-view?child=app-warranty-project-summary-view
+        EditView: tab://app-warranty-project-edit-task-view
+        Mark: 保修金项目申请
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 业务要件1
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+            - Key: 1
+              Name: 业务要件2
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+            - Key: 2
+              Name: 业务要件3
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+            - Key: 3
+              Name: 业务要件4
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+            - Key: 4
+              Name: 业务要件5
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+            - Key: 5
+              Name: 业务要件6
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+      warranty-project-inspect:
+        Name: 保修金验收结算申请
+        BusinessService: pengesoft.property.businessservice.engineering.IWarrantyProjectInspectDocMgeSvr
+        FlowFile: 保修金验收结算申请.wkf
+        ShowView: tab://app-business-show-task-view?child=app-warranty-project-inspect-apply-summary-view
+        EditView: tab://app-warranty-project-inspect-apply-edit-task-view
+        Mark: 保修金验收结算申请
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 业务要件1
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+            - Key: 1
+              Name: 业务要件2
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+            - Key: 2
+              Name: 业务要件3
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+      #资金拨付申请
+      expend-apply:
+        Name: 拨付申请
+        BusinessService: pengesoft.property.businessservice.projectbusiness.IProjectExpendBusinessDocMgeSvr
+        FlowFile: 资金拨付申请.wkf
+        ShowView: tab://app-business-show-task-view?child=app-project-expend-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-project-expend-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/资金拨付申请表"}]}
+        PushFinRecord: true
+        Mark: 维修使用
+        ExConfig:
+          ProjectTypes: ["normal-use", "simple-use", "urgent-use"]
+          MaxExpendRatio: 0.7
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 发票
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+      #电梯保险资金拨付申请
+      elevator-insurance-expend-apply:
+        Name: 电梯保险资金拨付申请
+        BusinessService: pengesoft.property.businessservice.projectbusiness.IProjectExpendBusinessDocMgeSvr
+        FlowFile: 电梯保险资金拨付申请.wkf
+        ShowView: tab://app-business-show-task-view?child=app-elevator-insurance-expend-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-elevator-insurance-expend-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/资金拨付申请表"}]}
+        PushFinRecord: true
+        Mark: 电梯保险
+        ExConfig:
+          ProjectTypes: ["elevator-insurance"]
+          MaxExpendRatio: 1.0
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 发票
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+      #保修金资金拨付申请
+      warranty-expend-apply:
+        Name: 保修金拨付申请
+        BusinessService: pengesoft.property.businessservice.engineering.IWarrantyProjectExpendDocMgeSvr
+        ShowView: tab://app-business-show-task-view?child=app-warranty-project-inspect-apply-summary-view
+        Mark: 保修金拨付申请
+      #项目验收普通申请
+      project-inspect-apply:
+        Name: 项目验收申请
+        BusinessService: pengesoft.property.businessservice.projectbusiness.IProjectInspectBusinessDocMgeSvr
+        FlowFile: 项目验收申请.wkf
+        ShowView: tab://app-business-show-task-view?child=app-project-inspect-apply-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-project-inspect-apply-edit-view?isShowInspectionInfo=true
+        Mark: 维修使用
+        ExConfig:
+          ProjectTypes: ["normal-use", "urgent-use"]
+          ExpendDocType: expend-apply
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 发票
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+              TaskNames: ["申请验收", "受理", "初审", "复审"]
+      project-simple-inspect-apply:
+        Name: 简单验收申请
+        BusinessService: pengesoft.property.businessservice.projectbusiness.IProjectInspectBusinessDocMgeSvr
+        FlowFile: 简单验收申请.wkf
+        ShowView: tab://app-business-show-task-view?child=app-project-inspect-apply-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-project-simple-inspect-apply-edit-view?bisType=project-simple-inspect-apply
+        Mark: 维修使用
+        ExConfig:
+          ProjectTypes: ["simple-use"]
+          ExpendDocType: expend-apply
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 发票
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+      #质保金拨付申请
+      ensure-expend-apply:
+        Name: 质保金申请
+        BusinessService: pengesoft.property.businessservice.projectbusiness.IProjectEnsureAmountExpendBusinessDocMgeSvr
+        FlowFile: 质保金申请.wkf
+        ShowView: tab://app-business-show-task-view?child=app-project-ensure-expend-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-project-ensure-expend-edit-view
+        PushFinRecord: true
+        Mark: 质保金申请
+        ExConfig:
+          ProjectTypes: []
+          ExpendDocType: expend-apply
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 发票
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+      project-clear-back:
+        Name: 项目清退
+        BusinessService: pengesoft.property.businessservice.projectbusiness.IProjectCleanBackBusinessDocMgeSvr
+        FlowFile: 项目清退.wkf
+        ShowView: tab://app-business-show-task-view?child=app-project-clear-back-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-project-clear-back-edit-view&taskCfg={"bills":[{"btnName":"打印交款通知单","report":"物业系统/单据/通知单/交款通知单"}]}
+        PushFinRecord: false
+        Mark: 维修使用
+        ExConfig:
+          StopProjectWhenClearedExpandedMoney: false
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 要件一
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+      project-terminate:
+        Name: 项目终止
+        BusinessService: pengesoft.property.businessservice.projectbusiness.IProjectTerminateBusinessDocMgeSvr
+        FlowFile: 项目终止.wkf
+        ShowView: tab://app-business-show-task-view?child=app-project-terminate-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-project-terminate-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/项目终止申请表"}]}
+        Mark: 项目终止
+        ExConfig:
+          PubDocTemplate: /projectTerminatePublicity
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 要件一
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 2048
+              AllowMultiple: true
+              Required: false
+      #资金管理
+      owner-team-self-mge-apply:
+        Name: 自管申请
+        BusinessService: pengesoft.property.businessservice.financebusiness.IOwnerTeamSelfMgeBusinessDocMgeSvr
+        FlowFile: 业主委员会自管申请.wkf
+        ShowView: tab://app-business-show-task-view?child=app-owner-team-self-mge-apply-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-owner-team-self-mge-apply-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/业委会自管申请表"}]}
+        PushFinRecord: true
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 业主委员会自管申请附件1
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 1
+              Name: 业主委员会自管申请附件2
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+        Mark: 业主委员会自管申请
+      income-allocate:
+        Name: 收益分摊
+        BusinessService: pengesoft.property.businessservice.financebusiness.IncomeAllocateBusinessDocMgeSvr
+        FlowFile: 收益分摊.wkf
+        ShowView: tab://app-business-show-task-view?child=app-income-allocate-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-income-allocate-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/增值收益分摊申请表"}]}
+        PushFinRecord: false
+        ExConfig:
+          # 仅(当前)账户余额大于0的账户参与分摊
+          AccountOnlyBalanceGreaterThanZero: true
+        Mark: 收益分摊
+      settlement-interest:
+        Name: 结息
+        BusinessService: pengesoft.property.businessservice.financebusiness.IInterestSettlementBusinessDocMgeSvr
+        FlowFile: 结息.wkf
+        ShowView: tab://app-business-show-task-view?child=app-settlement-interest-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-settlement-interest-summary-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/增值收益分摊申请表"}]}
+        PushFinRecord: false
+        ExConfig:
+          # 仅(当前)账户余额大于0的账户参与结息
+          AccountOnlyBalanceGreaterThanZero: true
+        Mark: 结息
+      ea-area-finance-allocate:
+        Name: 物业区域资金分摊
+        BusinessService: pengesoft.property.businessservice.financebusiness.IEaAreaFinanceAllocateBusinessDocMgeSvr
+        FlowFile: 小区资金分摊.wkf
+        ShowView: tab://app-business-show-task-view?child=app-ea-area-finance-allocate-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-ea-area-finance-allocate-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/资金分摊申请表"}]}
+        Mark: 资金分摊
+      appreciation-return:
+        Name: 增值返还
+        BusinessService: pengesoft.property.businessservice.financebusiness.IAppreciationReturnBusinessDocMgeSvr
+        FlowFile: 增值返还.wkf
+        ShowView: tab://app-business-show-task-view?child=app-appreciation-return-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-appreciation-return-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/增值返还申请表"}]}
+        PushFinRecord: true
+        Mark: 资金返还
+      appreciation-apply:
+        Name: 发起增值
+        BusinessService: pengesoft.property.businessservice.financebusiness.IAppreciationApplyBusinessDocMgeSvr
+        FlowFile: 发起增值.wkf
+        ShowView: tab://app-business-show-task-view?child=app-appreciation-apply-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-appreciation-apply-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/发起增值申请表"}]}
+        PushFinRecord: true
+        Mark: 发起增值
+      fund-adjust:
+        Name: 资金调配
+        BusinessService: pengesoft.property.businessservice.financebusiness.IFundAdjustBusinessDocMgeSvr
+        FlowFile: 资金调配.wkf
+        ShowView: tab://app-business-show-task-view?child=app-fund-adjust-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-fund-adjust-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/资金调配申请表"}]}
+        PushFinRecord: true
+        Mark: 资金调配
+      continue-raise:
+        Name: 续筹申请
+        BusinessService: pengesoft.property.businessservice.paybusiness.IContinueRaiseDocBusinessDocMgeSvr
+        FlowFile: 续筹交款.wkf
+        ShowView: tab://app-business-show-task-view?child=app-ea-house-continue-raise-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-ea-house-continue-raise&taskCfg={"bills":[{"btnName":"打印交款通知单","report":"物业系统/单据/通知单/交款通知单_续筹"},{"btnName":"打印交款清册","report":"物业系统/单据/通知单/续筹交款清册"}]}
+        PushFinRecord: true
+        ExConfig:
+          AccountTypes:
+            ["商品房维修资金", "日常维修金", "电梯专项资金", "公共收益"]
+        Mark: 续筹
+      account-fund-transfer:
+        Name: 账户资金划转
+        BusinessService: pengesoft.property.businessservice.financebusiness.IAccountFundsTransferDocMgeSvr
+        FlowFile: 账户资金划转.wkf
+        ShowView: tab://app-business-show-task-view?child=app-account-fund-transfer-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-account-fund-transfer-edit-view
+        PushFinRecord: true
+        Mark: 账户资金划转
+      owner-team-escrow-apply:
+        Name: 取消自管申请
+        BusinessService: pengesoft.property.businessservice.financebusiness.IOwnerTeamEscrowBusinessDocMgeSvr
+        FlowFile: 业主委员会取消自管申请.wkf
+        ShowView: tab://app-business-show-task-view?child=app-owner-team-escrow-apply-summary-view
+        EditView: tab://app-business-edit-task-view?child=app-owner-team-escrow-apply-edit-view
+        PushFinRecord: true
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 业主委员会取消自管申请附件1
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+            - Key: 1
+              Name: 业主委员会取消自管申请附件2
+              FileType: "*.jpg,*.png,*.pdf,*.docx,*.xlsx,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+        Mark: 业主委员会取消自管申请
+      property-contract-record:
+        Name: 物业服务合同备案
+        BusinessService: pengesoft.property.businessservice.contract.IPropertyContractRecordDocMgeSvr
+        FlowFile: 物业服务合同备案.wkf
+        ShowView: tab://app-business-show-task-view?child=app-property-contract-record-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-property-contract-record-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/物业服务合同备案申请表"}]}
+        PushFinRecord: true
+        Mark: 合同备案
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 工商营业执照正、副本
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+            - Key: 1
+              Name: 小区管理规约
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+            - Key: 2
+              Name: 物业室内装饰装修管理服务协议
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+            - Key: 3
+              Name: 按《物业管理条例》第八条规定已办理物业管理区域备案的证明
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+            - Key: 4
+              Name: 前期物业服务合同
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+            - Key: 5
+              Name: 物业服务合同
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+            - Key: 6
+              Name: 物业服务企业诚信证明资料
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+            - Key: 7
+              Name: 项目属地乡镇人民政府、街道办事处经办部门收取前期物业服务合同备案资料回执
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+      property-bid-record:
+        Name: 招标备案
+        BusinessService: pengesoft.property.businessservice.tender.ITenderRecordBusinessDocMgeSvr
+        FlowFile: 招标备案.wkf
+        ShowView: tab://app-business-show-task-view?child=app-property-bid-record-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-property-bid-record-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/招标备案申请表"}]}
+        PushFinRecord: true
+        Mark: 招标备案
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 招标文件
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+            - Key: 1
+              Name: 招标公告或者招标邀请书
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+            - Key: 2
+              Name: 建设工程规划许可证
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+            - Key: 3
+              Name: 建设用地规划许可证
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+            - Key: 4
+              Name: 项目总平图
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+            - Key: 5
+              Name: 委托代理机构的委托书
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+      property-winning-result-record:
+        Name: 中标结果备案
+        BusinessService: pengesoft.property.businessservice.bid.IBidRecordBusinessDocMgeSvr
+        FlowFile: 中标结果备案.wkf
+        ShowView: tab://app-business-show-task-view?child=app-property-winning-result-record-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-property-winning-result-record-edit-view&taskCfg={"bills":[{"btnName":"打印申请表","report":"物业系统/单据/业务申请表/中标结果备案申请表"}]}
+        PushFinRecord: true
+        Mark: 中标备案
+      batch-eaarea-property-ent-chg:
+        Name: 批量变更物业区域物业服务企业
+        BusinessService: pengesoft.property.businessservice.enterprise.IEaAreaPropertyEntChgDocMgeSvr
+        FlowFile: 批量变更物业区域物业服务企业.wkf
+        ShowView: tab://app-business-show-task-view?child=app-batch-eaarea-property-ent-chg-summary-view&__py__wxmp=/product/pages/business-information/business-information&wxmpTaskStatus=show
+        EditView: tab://app-business-edit-task-view?child=app-batch-eaarea-property-ent-chg-edit-view
+        PushFinRecord: true
+        Mark: 批量变更物业区域物业服务企业
+      engineering-apply:
+        Name: 保修金项目采集
+        BusinessService: pengesoft.property.businessservice.engineering.IEngineeringDocMgeSvr
+        FlowFile: 保修金项目采集.wkf
+        ShowView: tab://app-business-show-task-view?child=app-new-warranty-fund-items-summary-view
+        EditView: tab://app-business-edit-task-view?child=app-new-warranty-fund-items-edit-view
+        PushFinRecord: true
+        Mark: 保修金项目采集
+        BusinessTypeCode: "019"
+        ExConfig:
+          PaymentRatio: 0.20
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 业务要件1
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+            - Key: 1
+              Name: 业务要件2
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+            - Key: 2
+              Name: 业务要件3
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+      collection-account-chg:
+        Name: 保修金收款账户修改
+        BusinessService: pengesoft.property.businessservice.engineering.ICollectionAccountDocMgeSvr
+        FlowFile: 保修金收款账户修改.wkf
+        ShowView: tab://app-business-show-task-view?child=app-warranty-chg-collection-account-summary-view
+        EditView: tab://app-business-edit-task-view?child=app-warranty-chg-collection-account-edit-view
+        PushFinRecord: true
+        Mark: 保修金收款账户修改
+        ExConfig:
+          PaymentRatio: 0.20
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 业务要件1
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+            - Key: 1
+              Name: 业务要件2
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+            - Key: 2
+              Name: 业务要件3
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+      engineering-payment:
+        Name: 保修金交款
+        BusinessService: pengesoft.property.businessservice.engineering.IEngineeringPaymentDocMgeSvr
+        FlowFile: 保修金交款.wkf
+        ShowView: tab://app-business-show-task-view?child=app-warranty-pay-summary-view
+        EditView: tab://app-business-edit-task-view?child=app-warranty-pay-edit-view&taskCfg={"bills":[{"btnName":"打印交款通知单","report":"物业系统/单据/通知单/交款通知单_保修金"}]}
+        PushFinRecord: true
+        Mark: 保修金交款
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 业务要件1
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+            - Key: 1
+              Name: 业务要件2
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+            - Key: 2
+              Name: 业务要件3
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+      engineering-refund:
+        Name: 保修金退款
+        BusinessService: pengesoft.property.businessservice.engineering.IWarrantyRefundDocMgeSvr
+        FlowFile: 保修金退款.wkf
+        ShowView: tab://app-business-show-task-view?child=app-warranty-refund-summary-view
+        EditView: tab://app-business-edit-task-view?child=app-warranty-refund-edit-view
+        PushFinRecord: true
+        Mark: 保修金退款
+        Importants:
+          _Items:
+            - Key: 0
+              Name: 业务要件1
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+            - Key: 1
+              Name: 业务要件2
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+            - Key: 2
+              Name: 业务要件3
+              FileType: "*.jpg,*.gif,*.png,*.rar,*.zip"
+              MaxFileSize: 4096
+              AllowMultiple: true
+              Required: false
+    # 业务查询
+    #    businessDocQuery:
+    #      RolesConfig:
+    #        _Items:
+    #          - Key: 0
+    #            Roles: [ '物业项目经理' ]
+    #            BusinessTypes: [ 'warranty-project-inspect','warranty-project-admit','normal-use-admit','simple-use-admit','urgent-use-admit','project-simple-inspect-apply','expend-apply','project-inspect-apply','project-simple-inspect-apply','ensure-expend-apply','project-clear-back','project-terminate','elevator-insurance-admit','elevator-insurance-expend-apply' ]
+    # 项目配置
+    projectConfig:
+      simple-use:
+        Name: 简单使用
+        ShareAccountTypes: ["商品房维修资金", "日常维修金", "公共收益"]
+        FirstExpendRatio: 1
+        EnsureRatio: 0
+        ProjectPubDocTemplate: /projectpublicity
+        ContractDocTemplate: /constructioncontract
+        InspectPubDocTemplate: /inspectpublicity
+        ProjectProgressList: []
+        ShareLevel: 2
+        ProclamationList:
+          _Items:
+            - Name: 项目公告
+              TemplateName: /projectpublicity
+              MinDays: 7
+            - Name: 验收公示
+              TemplateName: /inspectpublicity
+              MinDays: 7
+      normal-use:
+        Name: 普通使用
+        ShareAccountTypes: ["商品房维修资金", "日常维修金", "公共收益"]
+        FirstExpendRatio: 0.3
+        EnsureRatio: 0.05
+        ProjectPubDocTemplate: /projectpublicity
+        ContractDocTemplate: /constructioncontract
+        InspectPubDocTemplate: /inspectpublicity
+        ProjectProgressList:
+          [
+            "预分摊",
+            "勘察",
+            "公示",
+            "投票",
+            "审价",
+            "立项",
+            "首期拨付",
+            "验收结算",
+            "尾款拨付",
+            "结束",
+          ]
+        ShareLevel: 2
+        ExaminePriceUnitsType:
+          _Items:
+            - Key: 1
+              Value: 不审价
+            - Key: 2
+              Value: 系统内审价单位
+            - Key: 3
+              Value: 系统外审价单位
+            - Key: 4
+              Value: 第三方审价单位
+        ProclamationList:
+          _Items:
+            - Name: 项目公告
+              TemplateName: /projectpublicity
+              MinDays: 7
+            - Name: 验收公示
+              TemplateName: /inspectpublicity
+              MinDays: 7
+      urgent-use:
+        Name: 紧急使用
+        ShareAccountTypes: ["商品房维修资金", "日常维修金", "公共收益"]
+        FirstExpendRatio: 0.3
+        EnsureRatio: 0.05
+        ProjectPubDocTemplate: /projectpublicity
+        ContractDocTemplate: /constructioncontract
+        InspectPubDocTemplate: /inspectpublicity
+        ProjectProgressList:
+          [
+            "预分摊",
+            "勘察",
+            "审价",
+            "公示",
+            "立项",
+            "首期拨付",
+            "验收结算",
+            "尾款拨付",
+            "结束",
+          ]
+        ShareLevel: 3
+        ExaminePriceUnitsType:
+          _Items:
+            - Key: 1
+              Value: 不审价
+            - Key: 2
+              Value: 系统内审价单位
+            - Key: 3
+              Value: 系统外审价单位
+            - Key: 4
+              Value: 第三方审价单位
+        ProclamationList:
+          _Items:
+            - Name: 项目公告
+              TemplateName: /projectpublicity
+              MinDays: 7
+            - Name: 验收公示
+              TemplateName: /inspectpublicity
+              MinDays: 7
+      elevator-insurance:
+        Name: 电梯保险
+        ShareAccountTypes: ["商品房维修资金", "日常维修金", "公共收益"]
+        FirstExpendRatio: 1
+        EnsureRatio: 0
+        ProjectPubDocTemplate: /projectpublicity
+        ProjectProgressList:
+          ["预分摊", "勘察", "公示", "投票", "立项", "首期拨付", "结束"]
+        ShareLevel: 2
+        ProclamationList:
+          _Items:
+            - Name: 项目公告
+              TemplateName: /projectpublicity
+              MinDays: 7
+
+    # 保修金项目配置
+    warrantyProjectConfig:
+      Name: 保修金
+      FirstExpendRatio: 0.3
+      ShareAccountTypes: ["保修金账户"]
+      ProjectPubDocTemplate: /warrantyProjectpublicity
+      InspectPubDocTemplate: /warrantyInspectpublicity
+      ProclamationList:
+        _Items:
+          - Name: 项目公告
+            TemplateName: /warrantyProjectpublicity
+            MinDays: 7
+          - Name: 验收公示
+            TemplateName: /warrantyInspectpublicity
+            MinDays: 7
+
+    # 银行通讯配置
+    bankCommunicate:
+      - bankCode:
+        bankCommunicate:
+
+    complaint:
+      #投诉业务编号
+      busClass: "001001"
+      #区局根部门Id
+      transferDepartmentId: 3
+      #默认业务受理角色Id
+      defaultDistributeRole: 63
+
+    # 统计相关配置
+    statisticsConfig:
+      # 使用统计相关配置
+      useStatistics:
+        # 直接展示的设施设备类型(其余展示在其他类型里)
+        FacilityTypes:
+          - 1010101 # 高压进线柜
+          - 1010102 # 高压计量柜
+          - 1010103 # 高压出线柜
+          - 1010104 # 高压配电柜
+          - 1010105 # 高压联络柜
+
+    # 电子票据
+    electronicBill:
+      # 是否启用电子票据：不配置或者配置为 false,都表示不启用
+      enable: true
+      #InvoiceOperator 电子票据自动开票 开票人
+      invoiceOperator: systemUid
+      # 电子票据服务商： yongyou:用友；bosi:博思
+      serviceProvider: yongyou
+      # 用友电子票据配置
+      yongyouEBillConfig:
+        # 服务地址
+        Url: http://123.56.123.217:7991
+        # 个人票据类型
+        PersonalBillType: ["业主开票"]
+        # 企业开票类型
+        EnterpriseBillType: ["公有售房单位开票"]
+        # 开票人
+        UserName: 张三
+        # 复核人
+        Checker: 李四
+      # 博思电子票据配置
+      bosiEbillConfig:
+        # 服务地址
+        Url: http://bosi.free.svipss.top/standard-web/api/standard/
+        # 个人票据类型
+        PersonalBillType: ["业主开票"]
+        # 企业开票类型
+        EnterpriseBillType: ["公有售房单位开票"]
+        # 应用帐号
+        AppId: "XYFSCS1234766"
+        # AppKey
+        AppKey: "1b0e1d4509d1fb33ff9f0d5f53"
+        # 区划
+        Region: "510000"
+        # 单位标识
+        DeptCode: "1002013"
+        # 计量单位
+        Unit: 元/平方米
+        # 收费项目代码
+        ChargeCode: "0602"
+        # 据种类编码
+        BillCode: "400801"
+        # 开票点编码
+        PlaceCode: "001"
+        # 收费员
+        Payee: "张三"
+        # 票据编制人
+        Author: "李四"
+        # 票据复核人
+        Reviewer:
+        # 缴费渠道
+        PayChannel: "01"
+        # 查验网址
+        CheckUrl: http://220.197.198.46:18004/billcheck/html/index.html
+        # 版本号
+        Version: "1.0"
+        # 扩展参数(JSON)
+        ExtraAttr:
+
+    # 诚信行为
+    integrityActiveSumamry:
+      goodActive:
+        - name: "普通良好行为"
+          extends:
+            EnterpriseScoring: 15
+            ProjectLeaderScoring: 15
+          child:
+            - name: "业主满意度满意度达到95%及以上"
+              extends:
+                EnterpriseScoring: 15
+                ProjectLeaderScoring: 15
+            - name: "业主满意度满意度达到85%及以上"
+              extends:
+                EnterpriseScoring: 10
+                ProjectLeaderScoring: 10
+            - name: "业主满意度满意度达到85%及以上"
+              extends:
+                EnterpriseScoring: 5
+                ProjectLeaderScoring: 5
+    # 业主评价相关配置
+    evaluateConfig:
+      # 小区排名条件
+      # 参与评价的房屋数占到本小区房屋数比例
+      AreaEvaluatePercent: 0.05 # 至少5%
+      # 参与评价的业主数占全市评价人数的比例
+      CityEvaluatePercent: 0.003 # 至少0.3%
+      # 业主评价是否配置匿名功能
+      HideName: true
+      # 项目经理回复多少分以下的评价意见(包含60.00)
+      RecoveryScoreCondition: 60.00
+
+#档案系统相关配置
+archive:
+  #档案备份脚本
+  backupScript: select * from pty_archive
+
+singlePageApp:
+  - includePatterns: ["/login"]
+    excludePatterns:
+    # 单页应用首页 "/" 或者 “/index.html”
+    home: "/"
