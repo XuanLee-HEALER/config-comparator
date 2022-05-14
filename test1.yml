@@ -1,9 +1,65 @@
-test:
-  a1:
-    - b2:
-      c1: 1
-    - b3: 2
-    - 3
-  a2: true
-  a3:
-    b1: 4
+autoCache:
+  Caches:
+    - Name: Cache.WarnRuleBeenExecuted
+      ServiceId: RedisCacheFactory
+      Eternal: false
+      TimeToLive: 600
+      TimeToIdle: 600
+      EvictionPolicy: LRU
+      MaxElement: 10000
+    - Name: Cache.UserContext
+      ServiceId: RedisCacheFactory
+      Eternal: false
+      TimeToLive: 600
+      TimeToIdle: 600
+      EvictionPolicy: LRU
+      MaxElement: 10000
+    - Name: Cache.Statistics
+      ServiceId: RedisCacheFactory
+      Eternal: false
+      TimeToLive: 600
+      TimeToIdle: 600
+      EvictionPolicy: LRU
+      MaxElement: 10000
+    - Name: Cache.EaAreaTemporaryStorage
+      ServiceId: RedisCacheFactory
+      Eternal: false
+      TimeToLive: 0
+      TimeToIdle: 0
+      EvictionPolicy: LRU
+      MaxElement: 10000
+    - Name: Cache.BusinessType
+      ServiceId: RedisCacheFactory
+      Eternal: false
+      TimeToLive: 43200
+      TimeToIdle: 43200
+      EvictionPolicy: LRU
+      MaxElement: 10000
+    - Name: Cache.RenderStatus
+      ServiceId: RedisCacheFactory
+      Eternal: false
+      TimeToLive: 300
+      TimeToIdle: 0
+      EvictionPolicy: LRU
+      MaxElement: 0
+    - Name: Cache.Report
+      ServiceId: RedisCacheFactory
+      Eternal: false
+      TimeToLive: 600
+      TimeToIdle: 600
+      EvictionPolicy: LRU
+      MaxElement: 10000
+    - Name: Cache.LoginCheck
+      ServiceId: RedisCacheFactory
+      Eternal: false
+      TimeToLive: 7200
+      TimeToIdle: 0
+      EvictionPolicy: LRU
+      MaxElement: 0
+    - Name: Cache.HotRank
+      ServiceId: RedisCacheFactory
+      Eternal: false
+      TimeToLive: 43200
+      TimeToIdle: 43200
+      EvictionPolicy: LRU
+      MaxElement: 10000

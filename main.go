@@ -5,6 +5,7 @@ import (
 	"io"
 	"log"
 	"os"
+	"strings"
 
 	"gopkg.in/yaml.v2"
 )
@@ -13,43 +14,62 @@ const (
 	blockSize = 8
 )
 
-type Entries map[interface{}]interface{}
-
 func main() {
 	file1 := os.Args[1]
-	var entries Entries
-	err := parseFile(file1, &entries)
+
+	res, err := parseFile(file1)
 	if err != nil {
 		log.Printf("比较失败，错误信息：%v", err)
 	}
 
-	handleEntries(&entries)
+	handleMap(res, 0)
 }
 
-func handleEntries(entries *Entries) {
-	for k, _ := range *entries {
-		switch k.(type) {
-		case string:
-			fmt.Println(k)
-		default:
-			break
+func handleMap(parse interface{}, layer int) {
+	if f, ok := parse.(map[interface{}]interface{}); ok {
+		for k, v := range f {
+			if tk, ok := k.(string); ok {
+				fmt.Print(strings.Repeat(" ", layer*2), tk, ":")
+				switch v.(type) {
+				case string, int, bool:
+					fmt.Println(" ", v)
+				case []interface{}:
+					fmt.Print("\n")
+					handleArr(v, layer+1)
+				case map[interface{}]interface{}:
+					fmt.Print("\n")
+					handleMap(v, layer+1)
+				default:
+					fmt.Printf("type of v %T \n", v)
+				}
+			}
 		}
 	}
 }
 
-func parseFile(fileName string, entries *Entries) (err error) {
+func handleArr(arr interface{}, layer int) {
+	if f, ok := arr.([]interface{}); ok {
+		for _, e := range f {
+			handleMap(e, layer)
+			fmt.Println()
+		}
+	}
+}
+
+func parseFile(fileName string) (res map[interface{}]interface{}, err error) {
 	fData, err := readFile(fileName)
 	if err != nil {
 		log.Printf("打开文件%v错误，错误信息：%v", fileName, err)
-		return err
+		return nil, err
 	}
 
-	err = yaml.Unmarshal(fData, entries)
+	res = make(map[interface{}]interface{})
+	err = yaml.Unmarshal(fData, res)
 	if err != nil {
 		log.Printf("解析yaml文件错误，错误信息：%v", err)
-		return err
+		return nil, err
 	}
-	return nil
+	return res, nil
 }
 
 func readFile(fileName string) (res []byte, err error) {
