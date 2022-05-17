@@ -1,6 +1,7 @@
 package main
 
 import (
+	"config-comparator/doctree"
 	"fmt"
 	"io"
 	"log"
@@ -22,7 +23,8 @@ func main() {
 		log.Printf("比较失败，错误信息：%v", err)
 	}
 
-	handleMap(res, 0)
+	docTree := doctree.CreateDocTrees(res)
+	fmt.Println(docTree)
 }
 
 func handleMap(parse interface{}, layer int) {
@@ -56,14 +58,14 @@ func handleArr(arr interface{}, layer int) {
 	}
 }
 
-func parseFile(fileName string) (res map[interface{}]interface{}, err error) {
+func parseFile(fileName string) (res map[string]interface{}, err error) {
 	fData, err := readFile(fileName)
 	if err != nil {
 		log.Printf("打开文件%v错误，错误信息：%v", fileName, err)
 		return nil, err
 	}
 
-	res = make(map[interface{}]interface{})
+	res = make(map[string]interface{})
 	err = yaml.Unmarshal(fData, res)
 	if err != nil {
 		log.Printf("解析yaml文件错误，错误信息：%v", err)
